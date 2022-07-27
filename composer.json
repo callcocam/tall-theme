@@ -13,14 +13,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Tall\\Thema\\": "src"
+            "Tall\\Theme\\": "src"
         }
     },
     
     "extra": {
         "laravel": {
             "providers": [
-                "Tall\\Thema\\ThemeServiceProvider"
+                "Tall\\Theme\\ThemeServiceProvider"
             ]
         }
     },
