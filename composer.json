@@ -1,0 +1,29 @@
+{
+    "name": "callcocam/tall-theme",
+    "type": "package",
+    "description": "The packages auto slug laravel model.",
+    "keywords": ["framework", "laravel", "livewire", "alpinejs", "tailwindcss"],
+    "license": "MIT",
+    "require": {
+        "php": "^7.3|^8.0",
+        "livewire/livewire": "^2.5",
+        "wireui/wireui": "^1.5",
+        "callcocam/tall-sluggable": "dev-main",
+        "callcocam/tall-status": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tall\\Thema\\": "src"
+        }
+    },
+    
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Tall\\Thema\\ThemeServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
