@@ -40,18 +40,19 @@ class Sidebar extends Component
 
     public function setFormProperties($model)
     {
-        if($submenu = $model->sub_menu){
-            foreach($submenu as $submenu){
-                \Menu::create($model->slug, function($menu) use($submenu){
-                    if($submenu->sub_menu->count()){                      
-                        $this->dropdown($menu, $submenu);     
-                    }
-                    else{
-                       $this->route($menu, $submenu);
-                    }
-                });
+        if($model){
+            if($submenu = $model->sub_menu){
+                foreach($submenu as $submenu){
+                    \Menu::create($model->slug, function($menu) use($submenu){
+                        if($submenu->sub_menu->count()){                      
+                            $this->dropdown($menu, $submenu);     
+                        }
+                        else{
+                           $this->route($menu, $submenu);
+                        }
+                    });
+                }    
             }
-
         }
     }
 
