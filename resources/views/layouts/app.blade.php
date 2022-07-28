@@ -9,8 +9,8 @@
     @tallScripts
 </head>
 <body class="h-screen">
-    <x-dialog z-index="z-50" blur="md" align="center" />
-    <x-notifications z-index="z-50" />
+    <x-dialog z-index="z-[100]" blur="md" align="center" />
+    <x-notifications z-index="z-[100]" />
     @livewire('theme::admin.includes.header')
     <!-- Page Content -->
     <main class="flex w-full">

@@ -12,6 +12,7 @@ use Tall\Menus\Models\Menu;
 class Sidebar extends Component
 {
 
+   
      /*
     |--------------------------------------------------------------------------
     |  Features mount
