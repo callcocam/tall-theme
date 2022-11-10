@@ -34,11 +34,4 @@ Route::middleware([
         });
     });
 
-    Route::prefix('makes')->group(function () {
-        Route::get('/', \Tall\Theme\Http\Livewire\Admin\Make\ListComponent::class)->name('admin.makes');
-        Route::get('/cadastrar', \Tall\Theme\Http\Livewire\Admin\Make\CreateComponent::class)->name('admin.make.create');
-        Route::get('/{model}/editar', \Tall\Theme\Http\Livewire\Admin\Make\EditComponent::class)->name('admin.make.edit');
-        Route::get('/{model}/visualizar', \Tall\Theme\Http\Livewire\Admin\Make\ShowComponent::class)->name('admin.make.show');
-        Route::get('/{model}/excluir', \Tall\Theme\Http\Livewire\Admin\Make\DeleteComponent::class)->name('admin.make.delete');
-    });
 });

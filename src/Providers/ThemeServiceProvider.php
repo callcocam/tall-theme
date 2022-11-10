@@ -71,30 +71,13 @@ class ThemeServiceProvider extends ServiceProvider
             Livewire::component( 'tall::admin.menus.sub-menus.create-component', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\CreateComponent::class);
             Livewire::component( 'tall::admin.menus.sub-menus.edit-component', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\EditComponent::class);
             Livewire::component( 'tall::admin.menus.sub-menus.show-component', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\ShowComponent::class);
-           
-           
-            Livewire::component( 'tall::admin.make.list-component', \Tall\Theme\Http\Livewire\Admin\Make\ListComponent::class);
-            Livewire::component( 'tall::admin.make.create-component', \Tall\Theme\Http\Livewire\Admin\Make\CreateComponent::class);
-            Livewire::component( 'tall::admin.make.edit-component', \Tall\Theme\Http\Livewire\Admin\Make\EditComponent::class);
-            Livewire::component( 'tall::admin.make.show-component', \Tall\Theme\Http\Livewire\Admin\Make\ShowComponent::class);
-            Livewire::component( 'tall::admin.make.delete-component', \Tall\Theme\Http\Livewire\Admin\Make\ShowComponent::class);
-            
-            Livewire::component( 'tall::admin.make.field.create-component', \Tall\Theme\Http\Livewire\Admin\Make\Field\CreateComponent::class);
-            Livewire::component( 'tall::admin.make.field.edit-component', \Tall\Theme\Http\Livewire\Admin\Make\Field\EditComponent::class);
-            
-            Livewire::component( 'tall::admin.make.field.attributes.create-component', \Tall\Theme\Http\Livewire\Admin\Make\Field\Attributes\CreateComponent::class);
-            Livewire::component( 'tall::admin.make.field.attributes.edit-component', \Tall\Theme\Http\Livewire\Admin\Make\Field\Attributes\EditComponent::class);
-            
-            Livewire::component( 'tall::admin.make.field.fk.create-component', \Tall\Theme\Http\Livewire\Admin\Make\Field\Fk\CreateComponent::class);
-            Livewire::component( 'tall::admin.make.field.fk.edit-component', \Tall\Theme\Http\Livewire\Admin\Make\Field\Fk\EditComponent::class);
-            
-           
-            Livewire::component( 'tall::partials.sidebar.main-component', \Tall\Theme\Http\Livewire\Partials\Sidebar\MainComponent::class);
-            Livewire::component( 'tall::partials.sidebar.panel-component', \Tall\Theme\Http\Livewire\Partials\Sidebar\PanelComponent::class);
-            Livewire::component( 'tall::partials.header-component', \Tall\Theme\Http\Livewire\Partials\HeaderComponent::class);
-            Livewire::component( 'tall::partials.mobile.searchbar-component', \Tall\Theme\Http\Livewire\Partials\Mobile\SearchbarComponent::class);
-            Livewire::component( 'tall::partials.sidebar.right-component', \Tall\Theme\Http\Livewire\Partials\Sidebar\RightComponent::class);
-            Livewire::component( 'tall::partials.sidebar.user-component', \Tall\Theme\Http\Livewire\Partials\Sidebar\UserComponent::class);
+
+            Livewire::component( 'tall::includes.partials.sidebar.main-component', \Tall\Theme\Http\Livewire\Includes\Partials\Sidebar\MainComponent::class);
+            Livewire::component( 'tall::includes.partials.sidebar.panel-component', \Tall\Theme\Http\Livewire\Includes\Partials\Sidebar\PanelComponent::class);
+            Livewire::component( 'tall::includes.partials.header-component', \Tall\Theme\Http\Livewire\Includes\Partials\HeaderComponent::class);
+            Livewire::component( 'tall::includes.partials.mobile.searchbar-component', \Tall\Theme\Http\Livewire\Includes\Partials\Mobile\SearchbarComponent::class);
+            Livewire::component( 'tall::includes.partials.sidebar.right-component', \Tall\Theme\Http\Livewire\Includes\Partials\Sidebar\RightComponent::class);
+            Livewire::component( 'tall::includes.partials.sidebar.user-component', \Tall\Theme\Http\Livewire\Includes\Partials\Sidebar\UserComponent::class);
 
         }
     }
