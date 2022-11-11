@@ -7,15 +7,13 @@
     "require": {
         "php": "^7.3|^8.0",
         "livewire/livewire": "^2.5",
-        "callcocam/tall-orm": "dev-main",
-        "callcocam/tall-theme": "dev-main"
+        "callcocam/tall-orm": "dev-main"
     },
     "autoload": {
         "psr-4": {
             "Tall\\Theme\\": "src"
         }
     },
-    
     "extra": {
         "laravel": {
             "providers": [
