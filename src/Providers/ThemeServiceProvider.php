@@ -12,6 +12,10 @@ use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Livewire\Livewire;
+use Tall\Theme\Contracts\Menu;
+use Tall\Theme\Contracts\MenuSub;
+use Tall\Theme\Models\Menu as ModelsMenu;
+use Tall\Theme\Models\MenuSub as ModelsMenuSub;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -33,8 +37,8 @@ class ThemeServiceProvider extends ServiceProvider
         
         self::configureDynamicComponent(__DIR__."/../../resources/views/components");
 
-        if(is_dir(resource_path("views/vendor/tall/comp/components"))){
-            self::configureDynamicComponent(resource_path("views/vendor/tall/comp/components"));
+        if(is_dir(resource_path("views/vendor/tall/theme/components"))){
+            self::configureDynamicComponent(resource_path("views/vendor/tall/theme/components"));
         }
 
         include_once __DIR__."/../../helpers.php";
@@ -52,6 +56,20 @@ class ThemeServiceProvider extends ServiceProvider
             }   
         }
      
+        if(class_exists('App\Models\Menu')){
+            $this->app->bind(Menu::class, 'App\Models\Menu');
+        }
+        else{
+                $this->app->bind(Menu::class, ModelsMenu::class);
+        }
+     
+        if(class_exists('App\Models\MenuSub')){
+            $this->app->bind(MenuSub::class, 'App\Models\MenuSub');
+        }
+        else{
+                $this->app->bind(MenuSub::class, ModelsMenuSub::class);
+        }
+
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/theme.php','theme'
         );
@@ -60,6 +78,7 @@ class ThemeServiceProvider extends ServiceProvider
     protected function loadLivewireComponents(){
 
         if (class_exists(Livewire::class)) {
+            Livewire::component( 'tall::admin.settings.apps.list-component', \Tall\Theme\Http\Livewire\Admin\Settings\Apps\ListComponent::class);
             Livewire::component( 'tall::admin.menus.list-component', \Tall\Theme\Http\Livewire\Admin\Menus\ListComponent::class);
             Livewire::component( 'tall::admin.menus.create-component', \Tall\Theme\Http\Livewire\Admin\Menus\CreateComponent::class);
             Livewire::component( 'tall::admin.menus.edit-component', \Tall\Theme\Http\Livewire\Admin\Menus\EditComponent::class);
@@ -85,7 +104,7 @@ class ThemeServiceProvider extends ServiceProvider
     private function publishViews(): void
     {
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/theme'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/tall/theme'),
         ], 'theme-views');
         
         $this->publishes([
@@ -98,9 +117,9 @@ class ThemeServiceProvider extends ServiceProvider
         ], 'theme-img');
 
         $this->publishes([
-            __DIR__ . '/../../resources/views' => resource_path('views/vendor/theme'),
+            __DIR__ . '/../../resources/views' => resource_path('views/vendor/tall/theme'),
             __DIR__ . '/../../resources/js/assets' => public_path('js/assets'),
-            __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/theme' ),
+            __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/tall/theme' ),
             __DIR__ . '/../../config/theme.php' => config_path('theme.php'),
             __DIR__ . '/../../public/img' => public_path('img'),
         ], 'theme');

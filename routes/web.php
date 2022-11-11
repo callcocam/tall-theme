@@ -18,19 +18,20 @@ Route::middleware([
     'verified'
 ])->prefix('admin')->group(function () {
 
+    Route::get('/settings/apps', \Tall\Theme\Http\Livewire\Admin\Settings\Apps\ListComponent::class)->name('admin.settings.apps');
     Route::prefix('menus')->group(function () {
         Route::get('/', \Tall\Theme\Http\Livewire\Admin\Menus\ListComponent::class)->name('admin.menus');
-        Route::get('/cadastrar', \Tall\Theme\Http\Livewire\Admin\Menus\CreateComponent::class)->name('admin.menu.create');
-        Route::get('/{model}/editar', \Tall\Theme\Http\Livewire\Admin\Menus\EditComponent::class)->name('admin.menu.edit');
-        Route::get('/{model}/visualizar', \Tall\Theme\Http\Livewire\Admin\Menus\ShowComponent::class)->name('admin.menu.show');
-        Route::get('/{model}/excluir', \Tall\Theme\Http\Livewire\Admin\Menus\DeleteComponent::class)->name('admin.menu.delete');
+        Route::get('/cadastrar', \Tall\Theme\Http\Livewire\Admin\Menus\CreateComponent::class)->name('admin.menus.create');
+        Route::get('/{model}/editar', \Tall\Theme\Http\Livewire\Admin\Menus\EditComponent::class)->name('admin.menus.edit');
+        Route::get('/{model}/visualizar', \Tall\Theme\Http\Livewire\Admin\Menus\ShowComponent::class)->name('admin.menus.show');
+        Route::get('/{model}/excluir', \Tall\Theme\Http\Livewire\Admin\Menus\DeleteComponent::class)->name('admin.menus.delete');
         Route::prefix('sub-menus')->group(function () {
 
             Route::get('/', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\ListComponent::class)->name('admin.menus.sub-menus');
-            Route::get('/cadastrar', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\CreateComponent::class)->name('admin.menus.sub-menu.create');
-            Route::get('/{model}/editar', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\EditComponent::class)->name('admin.menus.sub-menu.edit');
-            Route::get('/{model}/visualizar', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\ShowComponent::class)->name('admin.menus.sub-menu.show');
-            Route::get('/{model}/excluir', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\DeleteComponent::class)->name('admin.menus.sub-menu.delete');
+            Route::get('/cadastrar', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\CreateComponent::class)->name('admin.menus.sub-menus.create');
+            Route::get('/{model}/editar', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\EditComponent::class)->name('admin.menus.sub-menus.edit');
+            Route::get('/{model}/visualizar', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\ShowComponent::class)->name('admin.menus.sub-menus.show');
+            Route::get('/{model}/excluir', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\DeleteComponent::class)->name('admin.menus.sub-menus.delete');
         });
     });
 

@@ -1,0 +1,1 @@
+<x-tall-icon name="{{ $file }}" style="{{ $style }}" />

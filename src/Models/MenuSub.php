@@ -21,14 +21,34 @@ class MenuSub extends AbstractModel
     protected $guarded = [
         'id'
     ];
+    protected $with = [
+        'sub_menus'
+    ];
+
+    protected $appends = ['menus'];
 
     public function sub_menus()
     {
-        if(class_exists('\\App\\Models\\Menu')){
-            return $this->hasOne('\\App\\Models\\Menu');
+        if(class_exists('\\App\\Models\\MenuSub')){
+            return $this->hasOne('\\App\\Models\\MenuSub');
         }
-            return $this->hasOne(Menu::class);
+            return $this->hasOne(MenuSub::class);
     }
+
+    public function menus()
+    {
+        if(class_exists('\\App\\Models\\Menu')){
+            return $this->belongsToMany('\\App\\Models\\Menu');
+        }
+            return $this->belongsToMany(Menu::class);
+    }
+
+
+    public function getMenusAttribute()
+    {
+        return array_values($this->menus()->pluck('id','id')->toArray());
+    }
+
 
      /**
      * Get the menu subs attributes.
