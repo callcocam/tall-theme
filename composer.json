@@ -8,7 +8,11 @@
         "php": "^7.3|^8.0",
         "laravel/jetstream": "^2.12",
         "livewire/livewire": "^2.5",
-        "callcocam/tall-orm": "dev-main"
+        "callcocam/tall-orm": "dev-main",
+        "callcocam/tall-table": "dev-main",
+        "callcocam/tall-form": "dev-main",
+        "callcocam/tall-cms": "dev-main",
+        "callcocam/tall-acl": "dev-main"
     },
     "autoload": {
         "psr-4": {
