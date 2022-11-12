@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "laravel/jetstream": "^2.12",
         "livewire/livewire": "^2.5",
         "callcocam/tall-orm": "dev-main"
     },

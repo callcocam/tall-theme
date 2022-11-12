@@ -117,11 +117,16 @@ class ThemeServiceProvider extends ServiceProvider
         ], 'theme-img');
 
         $this->publishes([
+            __DIR__ . '/../../database' => database_path(),
+        ], 'theme-database');
+        
+        $this->publishes([
             __DIR__ . '/../../resources/views' => resource_path('views/vendor/tall/theme'),
             __DIR__ . '/../../resources/js/assets' => public_path('js/assets'),
             __DIR__ . '/../../resources/lang' => resource_path('lang/vendor/tall/theme' ),
             __DIR__ . '/../../config/theme.php' => config_path('theme.php'),
             __DIR__ . '/../../public/img' => public_path('img'),
+            __DIR__ . '/../../database' => database_path(),
         ], 'theme');
 
     }
