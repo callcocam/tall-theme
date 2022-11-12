@@ -110,10 +110,13 @@ class ThemeServiceProvider extends ServiceProvider
         ], 'theme-views');
         
         $this->publishes([
-            __DIR__ . '/../../resources/js' => resource_path(),
-            __DIR__ . '/../../assets/package.json' => base_path(),
-            __DIR__ . '/../../assets/tailwind.config.js' => base_path(),
-            __DIR__ . '/../../assets/vite.config.js' => base_path(),
+            __DIR__ . '/../../assets/livewire' => resource_path('views/vendor/livewire'),
+            __DIR__ . '/../../resources/css' => resource_path('css'),
+            __DIR__ . '/../../resources/js' => resource_path('js'),
+            __DIR__ . '/../../assets/package.json' => base_path('package.json'),
+            __DIR__ . '/../../assets/tailwind.config.js' => base_path('tailwind.config.js'),
+            __DIR__ . '/../../assets/vite.config.js' => base_path('vite.config.js'),
+            __DIR__ . '/../../assets/images' => public_path('images'),
         ], 'theme-js');
 
 
