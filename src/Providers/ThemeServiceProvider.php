@@ -110,9 +110,13 @@ class ThemeServiceProvider extends ServiceProvider
         ], 'theme-views');
         
         $this->publishes([
-            __DIR__ . '/../../resources/views/dash' => resource_path('views'),
-            __DIR__ . '/../../public' => public_path(),
+            __DIR__ . '/../../resources/js' => resource_path(),
+            __DIR__ . '/../../assets/package.json' => base_path(),
+            __DIR__ . '/../../assets/tailwind.config.js' => base_path(),
+            __DIR__ . '/../../assets/vite.config.js' => base_path(),
         ], 'theme-js');
+
+
         
         $this->publishes([
             __DIR__ . '/../../public/img' => public_path('img'),
