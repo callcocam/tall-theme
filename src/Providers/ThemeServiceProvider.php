@@ -43,7 +43,7 @@ class ThemeServiceProvider extends ServiceProvider
             self::configureDynamicComponent(resource_path("views/vendor/tall/theme/components"));
         }
 
-        include_once __DIR__."/../../helpers.php";
+        // include_once __DIR__."/../../helpers.php";
 
         // $this->createDirectives();
 
