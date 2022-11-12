@@ -35,6 +35,8 @@ class ThemeServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'tall');
         
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+       
         self::configureDynamicComponent(__DIR__."/../../resources/views/components");
 
         if(is_dir(resource_path("views/vendor/tall/theme/components"))){
