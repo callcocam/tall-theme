@@ -13,8 +13,8 @@ class CreateSubMenuTenantTable extends Migration
      */
     public function up()
     {
-        Schema::create('sub_menu_tenant', function (Blueprint $table) {
-            $table->foreignUuid('sub_menu_id')->constrained('menu_subs')->onDelete('cascade');
+        Schema::create('menu_sub_tenant', function (Blueprint $table) {
+            $table->foreignUuid('menu_sub_id')->constrained('menu_subs')->onDelete('cascade');
             $table->foreignUuid('tenant_id')->constrained('tenants')->onDelete('cascade');
             $table->timestamps();
         });
@@ -27,6 +27,6 @@ class CreateSubMenuTenantTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_menu_tenant');
+        Schema::dropIfExists('menu_sub_tenant');
     }
 }
