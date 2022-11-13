@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('menu_subs')) {
+        if(Schema::hasTable('menu_subs')) {
             Schema::table('menu_subs', function (Blueprint $table) {
                 $table->foreignUuid('menu_sub_id')->nullable()->constrained('menu_subs')->cascadeOnDelete();     
             });
