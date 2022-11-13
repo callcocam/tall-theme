@@ -26,8 +26,7 @@ class CreateSubMenus extends Migration
                 $table->integer('ordering')->nullable()->default('0');
                 $table->integer('sibling')->nullable();
                 $table->enum('status',['draft','published'])->nullable()->comment("Situação")->default('published'); 
-                $table->foreignUuid('menu_sub_id')->nullable()->constrained('menu_subs')->cascadeOnDelete();          
-                // $table->foreignUuid('menu_id')->nullable()->constrained('menus')->cascadeOnDelete();          
+               // $table->foreignUuid('menu_id')->nullable()->constrained('menus')->cascadeOnDelete();          
                 $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();      
                 $table->timestamps();
                 $table->softDeletes();         
