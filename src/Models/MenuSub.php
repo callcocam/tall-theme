@@ -6,8 +6,10 @@
 */
 namespace Tall\Theme\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tall\Orm\Models\AbstractModel;
+use Illuminate\Support\Str;
 
 class MenuSub extends AbstractModel
 {
@@ -27,12 +29,17 @@ class MenuSub extends AbstractModel
 
     protected $appends = ['menus'];
 
+    public function scopeParent(Builder $builder, $parent)
+    {
+       $builder->where('menu_sub_id', $parent);
+    }
+
     public function sub_menus()
     {
         if(class_exists('\\App\\Models\\MenuSub')){
-            return $this->hasOne('\\App\\Models\\MenuSub');
+            return $this->hasMany('\\App\\Models\\MenuSub');
         }
-            return $this->hasOne(MenuSub::class);
+            return $this->hasMany(MenuSub::class);
     }
 
     public function menus()
@@ -48,6 +55,7 @@ class MenuSub extends AbstractModel
     {
         return array_values($this->menus()->pluck('id','id')->toArray());
     }
+
 
 
      /**

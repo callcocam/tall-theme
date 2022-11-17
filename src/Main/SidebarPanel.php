@@ -6,9 +6,25 @@
 */
 namespace Tall\Theme\Main;
 
+use Tall\Theme\Contracts\Menu;
 
 class SidebarPanel
 {
+
+
+    public static function menus($slug)
+    {
+        if($menus = app(Menu::class)->query()->whereSlug($slug)->first()){
+            return $menus;
+        }
+        return [];
+    }
+
+    public static function menuSubs()
+    {
+        # code...
+    }
+
     public static function elements()
     {
         return [

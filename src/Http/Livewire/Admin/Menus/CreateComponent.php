@@ -6,7 +6,6 @@
 */
 namespace Tall\Theme\Http\Livewire\Admin\Menus;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Route;
 use Tall\Form\Fields\Field;
 use Tall\Orm\Http\Livewire\FormComponent;
@@ -16,7 +15,6 @@ use Tall\Theme\Models\Menu;
 class CreateComponent extends FormComponent
 {
 
-    use AuthorizesRequests;
      /*
     |--------------------------------------------------------------------------
     |  Features mount
@@ -26,7 +24,6 @@ class CreateComponent extends FormComponent
     */
     public function mount(?Menu $model)
     {
-        $this->authorize(Route::currentRouteName());
         
         $this->setFormProperties(app(ContractsMenu::class)->make($this->blankModel()),Route::currentRouteName()); 
     }

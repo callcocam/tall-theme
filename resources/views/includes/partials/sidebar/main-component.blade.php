@@ -30,9 +30,22 @@
                         class="{{ $routePrefix === 'dashboards' ? 'fill-primary dark:fill-accent' : 'fill-slate-500 dark:fill-navy-200' }} " />
                 </svg>
             </a>
+            @if ($menuItems = data_get($sidebarMenu, 'sub_menus'))
+                @foreach ($menuItems as $keyMenu => $menu)
+                    @if (!data_get($menu, 'menu_sub_id'))
+                        @if (Route::has(data_get($menu, 'link')))
+                            <a href="{{ route(data_get($menu, 'link')) }}"
+                                class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 {{ $routePrefix === 'forms' ? 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 bg-primary/10 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90' : 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25' }}"
+                                x-tooltip.placement.right="'{{ data_get($menu, 'name') }}'">
+                               <x-tall-icon name="{{ data_get($menu, 'icone') }}" class="h-7 w-7" />
+                            </a>
+                        @endif
+                    @endif
+                @endforeach
+            @endif
 
             <!-- Apps -->
-            <a href="{{ route('admin') }}"
+            {{-- <a href="{{ route('admin') }}"
                 class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 {{ $routePrefix === 'apps' ? 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 bg-primary/10 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90' : 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25' }}"
                 x-tooltip.placement.right="'Applications'">
                 <svg class="h-7 w-7" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,10 +67,10 @@
                         class="{{ $routePrefix === 'apps' ? 'stroke-primary dark:stroke-accent-light' : 'stroke-slate-500 dark:stroke-navy-200' }}"
                         stroke-linecap="round" />
                 </svg>
-            </a>
+            </a> --}}
 
             <!-- Pages And Layouts -->
-            <a href="{{ route('admin') }}"
+            {{-- <a href="{{ route('admin') }}"
                 class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 {{ $routePrefix === 'layouts' ? 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 bg-primary/10 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90' : 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25' }}"
                 x-tooltip.placement.right="'Pages & Layouts'">
                 <svg class="h-7 w-7" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,10 +90,10 @@
                         class="{{ $routePrefix === 'layouts' ? 'fill-primary dark:fill-accent' : 'fill-slate-500 dark:fill-navy-200' }} "
                         fill-opacity="0.3" />
                 </svg>
-            </a>
+            </a> --}}
 
             <!-- Forms -->
-            <a href="{{ route('admin') }}"
+            {{-- <a href="{{ route('admin') }}"
                 class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 {{ $routePrefix === 'forms' ? 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 bg-primary/10 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90' : 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25' }}"
                 x-tooltip.placement.right="'Forms'">
                 <svg class="h-7 w-7" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,10 +107,10 @@
                         d="M7.95 3H5.25C3.9 3 3 3.9 3 5.25V17.4C3 17.643 3.02699 17.886 3.07199 18.12C3.09899 18.237 3.12599 18.354 3.16199 18.471C3.20699 18.606 3.252 18.741 3.306 18.867C3.315 18.876 3.31501 18.885 3.31501 18.885C3.32401 18.885 3.32401 18.885 3.31501 18.894C3.44101 19.146 3.585 19.389 3.756 19.614C3.855 19.731 3.95401 19.839 4.05301 19.947C4.15201 20.055 4.26 20.145 4.377 20.235L4.38601 20.244C4.61101 20.415 4.854 20.559 5.106 20.685C5.115 20.676 5.11501 20.676 5.11501 20.685C5.25001 20.748 5.385 20.793 5.529 20.838C5.646 20.874 5.76301 20.901 5.88001 20.928C6.11401 20.973 6.357 21 6.6 21C6.969 21 7.347 20.946 7.698 20.829C7.797 20.793 7.89599 20.757 7.99499 20.712C8.30999 20.586 8.61601 20.406 8.88601 20.172C8.96701 20.109 9.05701 20.028 9.13801 19.947L9.17399 19.911C9.80399 19.263 10.2 18.372 10.2 17.4V5.25C10.2 3.9 9.3 3 7.95 3ZM6.6 18.75C5.853 18.75 5.25 18.147 5.25 17.4C5.25 16.653 5.853 16.05 6.6 16.05C7.347 16.05 7.95 16.653 7.95 17.4C7.95 18.147 7.347 18.75 6.6 18.75Z"
                         class="{{ $routePrefix === 'forms' ? 'fill-primary dark:fill-accent' : 'fill-slate-500 dark:fill-navy-200' }}" />
                 </svg>
-            </a>
+            </a> --}}
 
             <!-- Components -->
-            <a href="{{ route('admin') }}"
+            {{-- <a href="{{ route('admin') }}"
                 class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 {{ $routePrefix === 'components' ? 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 bg-primary/10 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90' : 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25' }}"
                 x-tooltip.placement.right="'Components'">
                 <svg class="h-7 w-7" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -111,10 +124,10 @@
                         d="M21.25 16C21.25 18.8962 18.8962 21.25 16 21.25C14.6525 21.25 13.4275 20.7425 12.5 19.9025C13.5763 18.9487 14.25 17.5487 14.25 16C14.25 15.3175 14.1187 14.6612 13.8825 14.0662C15.4837 13.6287 16.7787 12.4562 17.3825 10.9337C19.605 11.5375 21.25 13.585 21.25 16Z"
                         class="{{ $routePrefix === 'components' ? 'fill-primary dark:fill-accent' : 'fill-slate-500 dark:fill-navy-200' }}" />
                 </svg>
-            </a>
+            </a> --}}
 
             <!-- Elements -->
-            <a href="{{ route('admin') }}"
+            {{-- <a href="{{ route('admin') }}"
                 class="flex h-11 w-11 items-center justify-center rounded-lg outline-none transition-colors duration-200 {{ $routePrefix === 'elements' ? 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:bg-navy-600 bg-primary/10 dark:hover:bg-navy-450 dark:focus:bg-navy-450 dark:active:bg-navy-450/90' : 'hover:bg-primary/20 focus:bg-primary/20 active:bg-primary/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25' }}"
                 x-tooltip.placement.right="'Elements'">
                 <svg class="h-7 w-7" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -125,7 +138,7 @@
                         d="M21.1667 15.2083C21.1667 18.4992 18.4992 21.1667 15.2083 21.1667C11.9175 21.1667 9.25 18.4992 9.25 15.2083C9.25 15.0525 9.25917 14.9058 9.26833 14.75H13.3108C14.9792 14.75 16.0425 12.9625 15.2358 11.4958L14.0625 9.36C14.4292 9.28666 14.8142 9.25 15.2083 9.25C18.4992 9.25 21.1667 11.9175 21.1667 15.2083Z"
                         class="{{ $routePrefix === 'elements' ? 'fill-primary dark:fill-accent' : 'fill-slate-500 dark:fill-navy-200' }}" />
                 </svg>
-            </a>
+            </a> --}}
         </div>
 
         <!-- Bottom Links -->

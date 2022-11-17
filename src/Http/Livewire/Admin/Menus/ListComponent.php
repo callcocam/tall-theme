@@ -18,8 +18,6 @@ class ListComponent extends TableComponent
     {
         
         $this->setUp(Route::currentRouteName());
-
-        $this->setConfigProperties($this->moke($this->getName()));
         
     }
     
@@ -32,7 +30,7 @@ class ListComponent extends TableComponent
     public function columns(){
         return [
             Column::make('Name'),
-            Column::status(),
+            // Column::status(),
             Column::actions([
                 Column::make('Edit')->icon('pencil')->route('admin.menus.edit'),
                 Column::make('Delete')->icon('trash')->route('admin.menus.delete'),

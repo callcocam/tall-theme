@@ -6,7 +6,6 @@
 */
 namespace Tall\Theme\Http\Livewire\Admin\Menus;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Route;
 use Tall\Form\Fields\Field;
 use Tall\Orm\Http\Livewire\FormComponent;
@@ -15,7 +14,6 @@ use Tall\Theme\Models\Menu;
 
 class EditComponent extends FormComponent
 {
-    use AuthorizesRequests;
     /*
    |--------------------------------------------------------------------------
    |  Features mount
@@ -25,7 +23,6 @@ class EditComponent extends FormComponent
    */
    public function mount(?Menu $model)
    {
-       $this->authorize(Route::currentRouteName());
        
        $this->setFormProperties(app(ContractsMenu::class)->firstWhere('id', $model->id),Route::currentRouteName()); 
    }

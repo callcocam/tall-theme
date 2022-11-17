@@ -37,7 +37,7 @@ class ListComponent extends TableComponent
     public function columns(){
         return [
             Column::make('Name'),
-            Column::status(),
+            // Column::status(),
             Column::actions([
                 Column::make('Edit')->icon('pencil')->route('admin.menus.sub-menus.edit'),
                 Column::make('Delete')->icon('trash')->route('admin.menus.sub-menus.delete'),

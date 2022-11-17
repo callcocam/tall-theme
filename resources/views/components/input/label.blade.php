@@ -12,7 +12,7 @@
     @if ($label)
         <span>{{ __($label) }}:</span>
     @endif
-    <div class="relative mt-1.5 flex">
+    <div class="relative mt-1.5 flex flex-col">
         {{ $slot }}
         @isset($icon)
             {{ $icon }}

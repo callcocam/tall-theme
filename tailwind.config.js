@@ -38,6 +38,13 @@ const customColors = {
 };
 
 module.exports = {
+  presets: [
+    require('./../tall-cms/tailwind.config'),
+    require('./../tall-acl/tailwind.config'),
+    require('./../tall-table/tailwind.config'),
+    require('./../tall-orm/tailwind.config'),
+    require('./../tall-form/tailwind.config')
+  ],
   content: [
     "./src/**/*.{php,html,js,jsx,ts,tsx,vue}",
     "./resources/**/*.{php,html,js,jsx,ts,tsx,vue}",

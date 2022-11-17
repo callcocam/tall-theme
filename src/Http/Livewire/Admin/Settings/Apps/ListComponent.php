@@ -6,18 +6,19 @@
 */
 namespace Tall\Theme\Http\Livewire\Admin\Settings\Apps;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Route;
 use Tall\Orm\Http\Livewire\AbstractComponent;
 
 class ListComponent extends AbstractComponent
 {
-    use AuthorizesRequests;
 
     public function mount()
     {
-       $this->authorize(Route::currentRouteName());
-        
+    //    $pageName = request()->route()->getName();
+    //    $routePrefix = request()->route()->getPrefix();
+    // //    $routePrefix = Str::beforeLast("admin.posts.edit", '.');
+       
+    // $current = app(MenuSub::class)->where('link',$routePrefix )->whereNull('menu_sub_id')->first();
+    //    dd($current,SidebarPanel::menus(config('theme.menus.admin','menu-admin'))->toArray(), $routePrefix);
     }
 
     

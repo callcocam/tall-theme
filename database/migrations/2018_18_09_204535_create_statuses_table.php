@@ -13,22 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tenants', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name')->nullable();
             $table->string('slug')->nullable(); 
-            $table->string('domain')->nullable(); 
-            $table->string('email')->nullable(); 
-            $table->string('prefix')->default('admin')->nullable();
-            $table->string('database')->default('tenant');
-            $table->string('middleware')->default('tenant');
-            $table->string('provider')->default('tenant');
+            $table->string('color')->nullable(); 
             $table->text('description')->nullable();   
-            $table->integer('parent')->nullable();   
             $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->enum('status',['draft','published'])->nullable()->comment("Situação")->default('published');
             $table->timestamps();
             $table->softDeletes();
+        });
+        Schema::table('tenants', function (Blueprint $table) {
+           
+            // $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();            
+            if (Schema::hasTable('statuses')) {           
+                $table->foreignUuid('status_id')->nullable()->constrained('statuses')->cascadeOnDelete();
+            }
+            else{
+                $table->enum('status_id',['draft','published'])->nullable()->comment("Situação")->default('published');
+            }
         });
     }
 
@@ -39,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tenants');
+        Schema::dropIfExists('statuses');
     }
 };

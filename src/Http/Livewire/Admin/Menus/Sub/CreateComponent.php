@@ -6,7 +6,6 @@
 */
 namespace Tall\Theme\Http\Livewire\Admin\Menus\Sub;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Route;
 use Tall\Form\Fields\Field;
 use Tall\Orm\Http\Livewire\FormComponent;
@@ -17,7 +16,6 @@ use Tall\Theme\Models\MenuSub;
 class CreateComponent extends FormComponent
 {
 
-    use AuthorizesRequests;
     /*
    |--------------------------------------------------------------------------
    |  Features mount
@@ -27,8 +25,6 @@ class CreateComponent extends FormComponent
    */
    public function mount(?MenuSub $model)
    {
-       $this->authorize(Route::currentRouteName());
-       
        $this->setFormProperties(app(ContractsMenuSub::class)->make($this->blankModel()),Route::currentRouteName()); 
    }
     
@@ -36,7 +32,7 @@ class CreateComponent extends FormComponent
    {
        return [
            Field::make('Nome do menu', 'name')->rules('required')->span(3),
-           Field::select('Menu', 'menu_sub_id', app(ContractsMenuSub::class)->query()->pluck('id','name'))->span(3),
+           Field::select('Menu', 'menu_sub_id', app(ContractsMenuSub::class)->query()->pluck('name','id'))->span(3),
            Field::make('Link de acesso', 'link')->span(3),
            Field::icone(load_icones_tom() )->span(3),
            Field::checkbox('Menus', 'menus', app(Menu::class)->pluck('name', 'id')->toArray()),

@@ -133,24 +133,19 @@
         <div class="card p-4 sm:p-5">
             <div class="avatar h-12 w-12">
                 <div class="is-initial rounded-full bg-warning text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24"
-                        stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
+                    <x-tall-icon name="rectangle-group" class="h-6 w-6" />
                 </div>
             </div>
             <h2 class="mt-5 text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
-                Point of Sale
+                {{ __('Tenants')}}
             </h2>
             <p class="mt-1">
-                Lineone POS UI Kit is responsive and high-quality UI design kit
-                for the Point of sale system.
+                Lista, cadastro, edição e exclusão tenants, Os tenants são os <b>APPS</b> que controlam os dados do sistema, o filtro é pelo dominio acessado. ex: <b>www.tenant.com</b>, e um tenant <b>www.landlord.com</b> é outro tenant.
             </p>
             <div class="mt-5 pb-1">
-                <a href=""
-                    class="border-b border-dashed border-current pb-0.5 font-medium text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70">View
-                    Application</a>
+                <x-tall-app-link href="{{ route('admin.tenants') }}">
+                    {{ __('View Tenants') }}
+                </x-tall-app-link>
             </div>
         </div>
 
@@ -161,16 +156,15 @@
                 </div>
             </div>
             <h2 class="mt-5 text-base font-medium tracking-wide text-slate-700 line-clamp-1 dark:text-navy-100">
-                Travel
+                {{ config('app.name')}}
             </h2>
             <p class="mt-1">
-                Lineone Travel UI Kit is responsive and high-quality UI design kit
-                for the travel agancy wesites.
+                {!!  config('app.tenant.description') !!}
             </p>
             <div class="mt-5 pb-1">
-                <a href=""
-                    class="border-b border-dashed border-current pb-0.5 font-medium text-primary outline-none transition-colors duration-300 hover:text-primary/70 focus:text-primary/70 dark:text-accent-light dark:hover:text-accent-light/70 dark:focus:text-accent-light/70">View
-                    Application</a>
+                <x-tall-app-link href="{{ route('admin.tenants.setting') }}">
+                    {{ __('View Tenant') }}
+                </x-tall-app-link>
             </div>
         </div>
     </div>

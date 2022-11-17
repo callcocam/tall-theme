@@ -7,6 +7,9 @@
 namespace Tall\Theme\Http\Livewire\Includes\Partials;;
 
 use Livewire\Component;
+use Tall\Theme\Main\SidebarPanel;
+use Illuminate\Support\Str;
+use Tall\Theme\Contracts\MenuSub;
 
 abstract class AbstractComponent extends Component
 {
@@ -15,8 +18,21 @@ abstract class AbstractComponent extends Component
     
    abstract public function view();
 
+   protected function data()
+   {
+    $pageName = request()->route()->getName();
+    $routePrefix = Str::replace('/','.',  request()->route()->getPrefix());
+    $current = app(MenuSub::class)->where('link',$routePrefix )->whereNull('menu_sub_id')->first();
+
+    return [
+        'routePrefix'=>$pageName,
+        'pageName'=>$routePrefix,
+        'current'=>$current,
+        'sidebarMenu'=>SidebarPanel::menus(config('theme.menus.admin','menu-admin')),
+    ];
+   }
     public function render()
     {
-        return view(sprintf("tall::%s-component", $this->view()));
+        return view(sprintf("tall::%s-component", $this->view()))->with($this->data());
     }
 }

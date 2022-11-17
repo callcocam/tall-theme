@@ -21,7 +21,13 @@ return new class extends Migration
                 $table->text('description')->nullable();
                 $table->integer('ordering')->nullable()->default('0');
                 $table->integer('sibling')->nullable();
-                $table->enum('status',['draft','published'])->nullable()->comment("Situação")->default('published');
+                        
+                if (Schema::hasTable('statuses')) {           
+                    $table->foreignUuid('status_id')->nullable()->constrained('statuses')->cascadeOnDelete();
+                }
+                else{
+                    $table->enum('status_id',['draft','published'])->nullable()->comment("Situação")->default('published');
+                }
                 $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();        
                 $table->timestamps();
                 $table->softDeletes();               
