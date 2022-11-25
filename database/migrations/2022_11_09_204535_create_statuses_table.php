@@ -19,21 +19,11 @@ return new class extends Migration
             $table->string('slug')->nullable(); 
             $table->string('color')->nullable(); 
             $table->text('description')->nullable();   
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();
             $table->enum('status',['draft','published'])->nullable()->comment("Situação")->default('published');
             $table->timestamps();
             $table->softDeletes();
         });
-        Schema::table('tenants', function (Blueprint $table) {
-           
-            // $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();            
-            if (Schema::hasTable('statuses')) {           
-                $table->foreignUuid('status_id')->nullable()->constrained('statuses')->cascadeOnDelete();
-            }
-            else{
-                $table->enum('status_id',['draft','published'])->nullable()->comment("Situação")->default('published');
-            }
-        });
+        
     }
 
     /**

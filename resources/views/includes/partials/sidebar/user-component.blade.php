@@ -20,8 +20,8 @@
                         {{ $user->email }}
                     </p>
                     @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                        <p class="text-xs text-slate-400 dark:text-navy-300">
-                            {{ Auth::user()->currentTeam->name }}
+                        <p class="text-xs text-slate-400 dark:text-navy-300" x-tooltip.placement.right="'{{ Auth::user()->currentTeam->name }}'">
+                            {{ Str::limit( Auth::user()->currentTeam->name, 20, '...') }}
                         </p>
                     @endif
                 </div>

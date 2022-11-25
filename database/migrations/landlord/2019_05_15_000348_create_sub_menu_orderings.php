@@ -20,8 +20,7 @@ return new class extends Migration
                 $table->foreignUuid('tenant_id')->nullable()->constrained('tenants')->cascadeOnDelete();          
                 $table->foreignUuid('menu_sub_id')->nullable()->constrained('menu_subs')->cascadeOnDelete();   
                 $table->foreignUuid('parent_menu_sub_id')->nullable()->constrained('menu_subs')->cascadeOnDelete();   
-                $table->foreignUuid('menu_id')->constrained('menus')->onDelete('cascade');       
-                $table->foreignUuid('user_id')->nullable()->constrained('users')->cascadeOnDelete();      
+                $table->foreignUuid('menu_id')->constrained('menus')->onDelete('cascade');        
                 $table->timestamps();
                 $table->softDeletes();         
             });

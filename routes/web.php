@@ -18,6 +18,7 @@ Route::middleware([
     'verified'
 ])->prefix('admin')->group(function () {
 
+    Route::get('', \Tall\Theme\Http\Livewire\Admin\DashboardComponent::class)->name('admin');
     Route::get('/settings/apps', \Tall\Theme\Http\Livewire\Admin\Settings\Apps\ListComponent::class)->name('admin.settings.apps');
     Route::prefix('menus')->group(function () {
         Route::get('/', \Tall\Theme\Http\Livewire\Admin\Menus\ListComponent::class)->name('admin.menus');

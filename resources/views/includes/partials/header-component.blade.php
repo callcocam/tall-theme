@@ -5,20 +5,22 @@
         <div class="flex w-full items-center justify-between">
             <!-- Left: Sidebar Toggle Button -->
             <div class="h-7 w-7">
-                <button
-                    class="menu-toggle ml-0.5 flex h-7 w-7 flex-col justify-center space-y-1.5 text-primary outline-none focus:outline-none dark:text-accent-light/80"
-                    :class="$store.global.isSidebarExpanded && 'active'"
-                    @click="$store.global.isSidebarExpanded = !$store.global.isSidebarExpanded">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                @if (data_get($current, 'sub_menus'))
+                    <button
+                        class="menu-toggle ml-0.5 flex h-7 w-7 flex-col justify-center space-y-1.5 text-primary outline-none focus:outline-none dark:text-accent-light/80"
+                        :class="$store.global.isSidebarExpanded && 'active'"
+                        x-on:click="$store.global.isSidebarExpanded = !$store.global.isSidebarExpanded">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                @endif
             </div>
 
             <!-- Right: Header buttons -->
             <div class="-mr-1.5 flex items-center space-x-2">
                 <!-- Mobile Search Toggle -->
-                <button @click="$store.global.isSearchbarActive = !$store.global.isSearchbarActive"
+                <button x-on:click="$store.global.isSearchbarActive = !$store.global.isSearchbarActive"
                     class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25 sm:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5 text-slate-500 dark:text-navy-100"
                         fill="none" viewbox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -29,7 +31,7 @@
 
                 <!-- Main Searchbar -->
                 <template x-if="$store.breakpoints.smAndUp">
-                    <div class="flex" x-data="usePopper({ placement: 'bottom-end', offset: 12 })" @click.outside="if(isShowPopper) isShowPopper = false">
+                    <div class="flex" x-data="usePopper({ placement: 'bottom-end', offset: 12 })" x-on:click.outside="if(isShowPopper) isShowPopper = false">
                         <div class="relative mr-4 flex h-8">
                             <input placeholder="Search here..."
                                 class="form-input peer h-full rounded-full bg-slate-150 px-4 pl-9 text-xs+ text-slate-800 ring-primary/50 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:text-navy-100 dark:placeholder-navy-300 dark:ring-accent/50 dark:hover:bg-navy-900 dark:focus:bg-navy-900"
@@ -50,42 +52,42 @@
                                 class="popper-box flex max-h-[calc(100vh-6rem)] w-80 flex-col rounded-lg border border-slate-150 bg-white shadow-soft dark:border-navy-800 dark:bg-navy-700 dark:shadow-soft-dark">
                                 <div x-data="{ activeTab: 'tabAll' }"
                                     class="is-scrollbar-hidden flex shrink-0 overflow-x-auto rounded-t-lg bg-slate-100 px-2 text-slate-600 dark:bg-navy-800 dark:text-navy-200">
-                                    <button @click="activeTab = 'tabAll'"
+                                    <button x-on:click="activeTab = 'tabAll'"
                                         :class="activeTab === 'tabAll' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
                                         class="btn shrink-0 rounded-none border-b-2 px-3.5 py-2.5">
                                         All
                                     </button>
-                                    <button @click="activeTab = 'tabFiles'"
+                                    <button x-on:click="activeTab = 'tabFiles'"
                                         :class="activeTab === 'tabFiles' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
                                         class="btn shrink-0 rounded-none border-b-2 px-3.5 py-2.5">
                                         Files
                                     </button>
-                                    <button @click="activeTab = 'tabChats'"
+                                    <button x-on:click="activeTab = 'tabChats'"
                                         :class="activeTab === 'tabChats' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
                                         class="btn shrink-0 rounded-none border-b-2 px-3.5 py-2.5">
                                         Chats
                                     </button>
-                                    <button @click="activeTab = 'tabEmails'"
+                                    <button x-on:click="activeTab = 'tabEmails'"
                                         :class="activeTab === 'tabEmails' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
                                         class="btn shrink-0 rounded-none border-b-2 px-3.5 py-2.5">
                                         Emails
                                     </button>
-                                    <button @click="activeTab = 'tabProjects'"
+                                    <button x-on:click="activeTab = 'tabProjects'"
                                         :class="activeTab === 'tabProjects' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
                                         class="btn shrink-0 rounded-none border-b-2 px-3.5 py-2.5">
                                         Projects
                                     </button>
-                                    <button @click="activeTab = 'tabTasks'"
+                                    <button x-on:click="activeTab = 'tabTasks'"
                                         :class="activeTab === 'tabTasks' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
@@ -370,7 +372,7 @@
                 </template>
 
                 <!-- Dark Mode Toggle -->
-                <button @click="$store.global.isDarkModeEnabled = !$store.global.isDarkModeEnabled"
+                <button x-on:click="$store.global.isDarkModeEnabled = !$store.global.isDarkModeEnabled"
                     class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                     <svg x-show="$store.global.isDarkModeEnabled"
                         x-transition:enter="transition-transform duration-200 ease-out absolute origin-top"
@@ -388,7 +390,7 @@
                             clip-rule="evenodd" />
                     </svg>
                 </button> <!-- Monochrome Mode Toggle -->
-                <button @click="$store.global.isMonochromeModeEnabled = !$store.global.isMonochromeModeEnabled"
+                <button x-on:click="$store.global.isMonochromeModeEnabled = !$store.global.isMonochromeModeEnabled"
                     class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                     <i
                         class="fa-solid fa-palette bg-gradient-to-r from-sky-400 to-blue-600 bg-clip-text text-lg font-semibold text-transparent"></i>
@@ -397,8 +399,8 @@
 
                 <!-- Notification-->
                 <div x-effect="if($store.global.isSearchbarActive) isShowPopper = false" x-data="usePopper({ placement: 'bottom-end', offset: 12 })"
-                    @click.outside="if(isShowPopper) isShowPopper = false" class="flex">
-                    <button @click="isShowPopper = !isShowPopper" x-ref="popperRef"
+                    x-on:click.outside="if(isShowPopper) isShowPopper = false" class="flex">
+                    <button x-on:click="isShowPopper = !isShowPopper" x-ref="popperRef"
                         class="btn relative h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-500 dark:text-navy-100"
                             stroke="currentColor" fill="none" viewbox="0 0 24 24">
@@ -440,28 +442,28 @@
                                 </div>
 
                                 <div class="is-scrollbar-hidden flex shrink-0 overflow-x-auto px-3">
-                                    <button @click="activeTab = 'tabAll'"
+                                    <button x-on:click="activeTab = 'tabAll'"
                                         :class="activeTab === 'tabAll' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
                                         class="btn shrink-0 rounded-none border-b-2 px-3.5 py-2.5">
                                         <span>All</span>
                                     </button>
-                                    <button @click="activeTab = 'tabAlerts'"
+                                    <button x-on:click="activeTab = 'tabAlerts'"
                                         :class="activeTab === 'tabAlerts' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
                                         class="btn shrink-0 rounded-none border-b-2 px-3.5 py-2.5">
                                         <span>Alerts</span>
                                     </button>
-                                    <button @click="activeTab = 'tabEvents'"
+                                    <button x-on:click="activeTab = 'tabEvents'"
                                         :class="activeTab === 'tabEvents' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
                                         class="btn shrink-0 rounded-none border-b-2 px-3.5 py-2.5">
                                         <span>Events</span>
                                     </button>
-                                    <button @click="activeTab = 'tabLogs'"
+                                    <button x-on:click="activeTab = 'tabLogs'"
                                         :class="activeTab === 'tabLogs' ?
                                             'border-primary dark:border-accent text-primary dark:text-accent-light' :
                                             'border-transparent hover:text-slate-800 focus:text-slate-800 dark:hover:text-navy-100 dark:focus:text-navy-100'"
@@ -833,7 +835,7 @@
                 </div>
 
                 <!-- Right Sidebar Toggle -->
-                <button @click="$store.global.isRightSidebarExpanded = true"
+                <button x-on:click="$store.global.isRightSidebarExpanded = true"
                     class="btn h-8 w-8 rounded-full p-0 hover:bg-slate-300/20 focus:bg-slate-300/20 active:bg-slate-300/25 dark:hover:bg-navy-300/20 dark:focus:bg-navy-300/20 dark:active:bg-navy-300/25">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5.5 w-5.5 text-slate-500 dark:text-navy-100"
                         fill="none" viewbox="0 0 24 24" stroke="currentColor">

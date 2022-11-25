@@ -9,11 +9,11 @@ namespace Tall\Theme\Models;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tall\Orm\Models\AbstractModel;
-use Illuminate\Support\Str;
+use Tall\Tenant\Concerns\UsesLandlordConnection;
 
 class MenuSub extends AbstractModel
 {
-    use HasFactory;
+    use HasFactory, UsesLandlordConnection;
     
     /**
      * The attributes that are mass assignable.
@@ -29,10 +29,10 @@ class MenuSub extends AbstractModel
 
     protected $appends = ['menus'];
 
-    public function scopeParent(Builder $builder, $parent)
-    {
-       $builder->where('menu_sub_id', $parent);
-    }
+    // public function scopeParent(Builder $builder, $parent)
+    // {
+    //    $builder->where('menu_sub_id', $parent);
+    // }
 
     public function sub_menus()
     {
@@ -40,6 +40,14 @@ class MenuSub extends AbstractModel
             return $this->hasMany('\\App\\Models\\MenuSub');
         }
             return $this->hasMany(MenuSub::class);
+    }
+
+    public function parent()
+    {
+        if(class_exists('\\App\\Models\\MenuSub')){
+            return $this->belongsTo('\\App\\Models\\MenuSub','menu_sub_id');
+        }
+            return $this->belongsTo(MenuSub::class,'menu_sub_id');
     }
 
     public function menus()

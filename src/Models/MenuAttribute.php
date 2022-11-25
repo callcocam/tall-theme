@@ -8,10 +8,11 @@ namespace Tall\Theme\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tall\Orm\Models\AbstractModel;
+use Tall\Tenant\Concerns\UsesLandlordConnection;
 
 class MenuAttribute extends AbstractModel
 {
-    use HasFactory;
+    use HasFactory, UsesLandlordConnection;
      /**
      * The attributes that are mass assignable.
      *

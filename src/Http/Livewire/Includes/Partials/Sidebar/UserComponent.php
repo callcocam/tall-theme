@@ -6,14 +6,14 @@
 */
 namespace Tall\Theme\Http\Livewire\Includes\Partials\Sidebar;
 
-use App\Models\User;
+use Tall\Team\Contracts\IUser;
 use Tall\Theme\Http\Livewire\Includes\Partials\AbstractComponent;
 
 class UserComponent extends AbstractComponent
 {
     public $user;
 
-    public function mount(User $user)
+    public function mount(IUser $user)
     {
        $this->user = $user;
     }

@@ -16,6 +16,7 @@ use Tall\Theme\Contracts\Menu;
 use Tall\Theme\Contracts\MenuSub;
 use Tall\Theme\Models\Menu as ModelsMenu;
 use Tall\Theme\Models\MenuSub as ModelsMenuSub;
+use Tall\Theme\View\Components\TeamLinkComponent;
 
 class ThemeServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,7 @@ class ThemeServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             //$this->commands([\Tall\Theme\Commands\CreateCommand::class]);
         }
+        Blade::component('tall-team-link', TeamLinkComponent::class);
 
         $this->loadLivewireComponents();
         
@@ -48,6 +50,7 @@ class ThemeServiceProvider extends ServiceProvider
         // $this->createDirectives();
 
         $this->app->register(RouteServiceProvider::class);    
+        
     }
 
     public function register(): void
@@ -59,27 +62,29 @@ class ThemeServiceProvider extends ServiceProvider
         }
      
         if(class_exists('App\Models\Menu')){
-            $this->app->bind(Menu::class, 'App\Models\Menu');
+            $this->app->singleton(Menu::class, 'App\Models\Menu');
         }
         else{
-                $this->app->bind(Menu::class, ModelsMenu::class);
+            $this->app->singleton(Menu::class, ModelsMenu::class);
         }
      
         if(class_exists('App\Models\MenuSub')){
-            $this->app->bind(MenuSub::class, 'App\Models\MenuSub');
+            $this->app->singleton(MenuSub::class, 'App\Models\MenuSub');
         }
         else{
-                $this->app->bind(MenuSub::class, ModelsMenuSub::class);
+            $this->app->singleton(MenuSub::class, ModelsMenuSub::class);
         }
 
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/theme.php','theme'
         );
+        
     }
     
     protected function loadLivewireComponents(){
 
         if (class_exists(Livewire::class)) {
+            Livewire::component( 'tall::admin.dashboard-component', \Tall\Theme\Http\Livewire\Admin\DashboardComponent::class);
             Livewire::component( 'tall::admin.settings.apps.list-component', \Tall\Theme\Http\Livewire\Admin\Settings\Apps\ListComponent::class);
             Livewire::component( 'tall::admin.menus.list-component', \Tall\Theme\Http\Livewire\Admin\Menus\ListComponent::class);
             Livewire::component( 'tall::admin.menus.create-component', \Tall\Theme\Http\Livewire\Admin\Menus\CreateComponent::class);

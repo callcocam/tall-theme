@@ -8,10 +8,12 @@ namespace Tall\Theme\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tall\Orm\Models\AbstractModel;
+use Tall\Tenant\Concerns\UsesLandlordConnection;
+use Tall\Theme\Contracts\IStatus;
 
-class Status extends AbstractModel
+class Status extends AbstractModel implements IStatus
 {
-    use HasFactory;
+    use HasFactory, UsesLandlordConnection;
     
     
     protected $guarded = ['id'];

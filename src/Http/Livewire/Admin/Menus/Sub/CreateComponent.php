@@ -41,6 +41,14 @@ class CreateComponent extends FormComponent
            Field::date('Última atualização', 'updated_at')->span(6)
         ];
    }
+   public function success($callback = null)
+   {
+    
+       if(parent::success($callback)){
+         $this->model->menus()->sync(data_get($this->form_data, 'menus'));
+       }
+       return true;
+   }
    
     public function view($compnent="-component")
     {
