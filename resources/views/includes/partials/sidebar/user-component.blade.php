@@ -20,8 +20,9 @@
                         {{ $user->email }}
                     </p>
                     @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                        <p class="text-xs text-slate-400 dark:text-navy-300" x-tooltip.placement.right="'{{ Auth::user()->currentTeam->name }}'">
-                            {{ Str::limit( Auth::user()->currentTeam->name, 20, '...') }}
+                        <p class="text-xs text-slate-400 dark:text-navy-300"
+                            x-tooltip.placement.right="'{{ Auth::user()->currentTeam->name }}'">
+                            {{ Str::limit(Auth::user()->currentTeam->name, 20, '...') }}
                         </p>
                     @endif
                 </div>
@@ -38,41 +39,43 @@
                         </div>
                     </x-slot>
                 </x-tall-acl.teams.user-link>
-                <!-- Team Management -->
-                <div class="block px-4 py-2 text-xs text-gray-400">
-                    {{ __('Manage Team') }}
-                </div>
-                <x-tall-acl.teams.user-link href="{{ route('admin.teams.show', Auth::user()->currentTeam->id) }}">
-                    <x-slot name="icon">
-                        <x-tall-icon name="cog" class="h-4.5 w-4.5" />
-                    </x-slot>
-                    {{ __('Team Settings') }}
-                    <x-slot name="description">
-                        <div class="text-xs text-slate-400 line-clamp-1 dark:text-navy-300">
-                            {{ __('Manage Team') }}
-                        </div>
-                    </x-slot>
-                </x-tall-acl.teams.user-link>
-                @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                    <x-tall-acl.teams.user-link href="{{ route('admin.teams.create') }}">
+                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                    <!-- Team Management -->
+                    <div class="block px-4 py-2 text-xs text-gray-400">
+                        {{ __('Manage Team') }}
+                    </div>
+                    <x-tall-acl.teams.user-link href="{{ route('admin.teams.show', Auth::user()->currentTeam->id) }}">
                         <x-slot name="icon">
-                            <x-tall-icon name="plus" class="h-4.5 w-4.5" />
+                            <x-tall-icon name="cog" class="h-4.5 w-4.5" />
                         </x-slot>
-                        {{ __('Create New Team') }}
+                        {{ __('Team Settings') }}
                         <x-slot name="description">
                             <div class="text-xs text-slate-400 line-clamp-1 dark:text-navy-300">
                                 {{ __('Manage Team') }}
                             </div>
                         </x-slot>
                     </x-tall-acl.teams.user-link>
-                @endcan
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                    <div class="block px-4 py-2 text-xs text-gray-400">
-                        {{ __('Switch Teams') }}
-                    </div>
-                    @foreach (Auth::user()->allTeams() as $team)
-                        <x-tall-acl.teams.switchable-team :team="$team" />
-                    @endforeach
+                    @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
+                        <x-tall-acl.teams.user-link href="{{ route('admin.teams.create') }}">
+                            <x-slot name="icon">
+                                <x-tall-icon name="plus" class="h-4.5 w-4.5" />
+                            </x-slot>
+                            {{ __('Create New Team') }}
+                            <x-slot name="description">
+                                <div class="text-xs text-slate-400 line-clamp-1 dark:text-navy-300">
+                                    {{ __('Manage Team') }}
+                                </div>
+                            </x-slot>
+                        </x-tall-acl.teams.user-link>
+                    @endcan
+                    @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                        <div class="block px-4 py-2 text-xs text-gray-400">
+                            {{ __('Switch Teams') }}
+                        </div>
+                        @foreach (Auth::user()->allTeams() as $team)
+                            <x-tall-acl.teams.switchable-team :team="$team" />
+                        @endforeach
+                    @endif
                 @endif
                 <div class="mt-3 px-4">
                     <form method="POST" action="{{ route('logout') }}">

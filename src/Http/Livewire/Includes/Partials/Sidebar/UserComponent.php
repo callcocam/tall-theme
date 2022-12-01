@@ -6,7 +6,7 @@
 */
 namespace Tall\Theme\Http\Livewire\Includes\Partials\Sidebar;
 
-use Tall\Team\Contracts\IUser;
+use Tall\Acl\Contracts\IUser;
 use Tall\Theme\Http\Livewire\Includes\Partials\AbstractComponent;
 
 class UserComponent extends AbstractComponent

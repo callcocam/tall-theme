@@ -7,7 +7,6 @@
 namespace Tall\Theme\Http\Livewire\Includes\Partials;;
 
 use Livewire\Component;
-use Tall\Theme\Main\SidebarPanel;
 use Illuminate\Support\Str;
 use Tall\Theme\Contracts\Menu;
 use Tall\Theme\Contracts\MenuSub;
