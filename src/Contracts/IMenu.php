@@ -7,7 +7,7 @@
 namespace Tall\Theme\Contracts;
 
 
-interface MenuSub
+interface IMenu
 {
     
 }

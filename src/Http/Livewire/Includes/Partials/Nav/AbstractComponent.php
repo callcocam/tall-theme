@@ -4,7 +4,7 @@
 * User: callcocam@gmail.com, contato@sigasmart.com.br
 * https://www.sigasmart.com.br
 */
-namespace Tall\Theme\Http\Livewire\Includes\Partials;;
+namespace Tall\Theme\Http\Livewire\Includes\Partials\Nav;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -22,10 +22,10 @@ abstract class AbstractComponent extends Component
    {
     $pageName = request()->route()->getName();
     $routePrefix = Str::replace('/','.',  request()->route()->getPrefix());
-    if (cache()->has($pageName)) {
-        $current = cache()->get($pageName);
-    }
-    else{
+    // if (cache()->has($pageName)) {
+    //     $current = cache()->get($pageName);
+    // }
+    // else{
         $current = app(IMenuSub::class)->where('link',$pageName )->whereNull('menu_sub_id')->first();
         if(!$current){
             $current = app(IMenuSub::class)->where('link',$pageName )->first();
@@ -33,8 +33,8 @@ abstract class AbstractComponent extends Component
                     $current =$parent;
                 }
         }
-        cache()->put($pageName, $current);
-    }         
+    //     cache()->put($pageName, $current);
+    // }         
    
     
     $subMenus = data_get($current,'sub_menus');
@@ -44,17 +44,20 @@ abstract class AbstractComponent extends Component
         'pageName'=>$routePrefix,
         'current'=>$current,
         'subMenus'=>$subMenus,
-        'sidebarMenu'=>$this->menus(config('theme.menus.admin','menusadmin')),
+        'sidebarMenu'=>$this->menus(config('theme.menus.site','menussite')),
     ];
    }
 
    public function menus($slug)
    {
-        if (cache()->has($slug)) {
+        if (!cache()->has($slug)) {
             return cache()->get($slug);
         }
         else{
-            if($menus = app(IMenu::class)->query()->whereSlug($slug)->first()){
+            if($menus = app(IMenu::class)->query()
+            ->when(isTenant(), function($builder){
+                $builder->tenants(get_tenant_id());
+            })->whereSlug($slug)->first()){
                 cache()->put($slug, $menus);
                 return $menus;
             }

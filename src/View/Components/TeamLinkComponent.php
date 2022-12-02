@@ -6,8 +6,10 @@
 */
 namespace Tall\Theme\View\Components;
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\View\Component;
-use Tall\Theme\Contracts\MenuSub;
+use Tall\Theme\Contracts\IMenuSub;
 
 class TeamLinkComponent extends Component
 {
@@ -22,7 +24,7 @@ class TeamLinkComponent extends Component
      *
      * @return void
      */
-    public function __construct(MenuSub $menu, $template="team-link",$classe=null, $active=null,$deactive=null)
+    public function __construct(IMenuSub $menu, $template="team-link",$classe=null, $active=null,$deactive=null)
     {
         $this->menu = $menu;
 
@@ -47,8 +49,32 @@ class TeamLinkComponent extends Component
         ->with('active',$this->active)
         ->with('deactive',$this->deactive)
         ->with('menu',$this->menu)
+        ->with('route',$this->route())
+        ->with('icone',$this->icone())
         ->with('routePrefix',request()->routeIs(sprintf("%s.*", data_get($this->menu, 'link'))))
-        ->with('permission',$this->user()->hasTeamPermission($this->team(),data_get($this->menu, 'link')));
+        ->with('permission',true);
+    }
+
+    protected function route(){
+
+        if(Route::has(data_get($this->menu, 'link'))){
+            return route(data_get($this->menu, 'link'));
+        }
+        if(Route::has(data_get($this->menu, 'slug'))){
+            return route(data_get($this->menu, 'slug'));
+        }
+        return "";
+    }
+
+    protected function icone(){
+        if (View::exists(sprintf('tall::components.icons.outline.%s', data_get($this->menu, 'icone')))):
+            $component = sprintf('outline.%s', data_get($this->menu, 'icone'));
+        elseif (View::exists(sprintf('tall::components.icons.solid.%s', data_get($this->menu, 'icone')))):
+            $component = sprintf('solid.%s', data_get($this->menu, 'icone'));
+        else:
+            $component = 'chevron-right';
+        endif;
+        return $component;
     }
 
     protected function user(){

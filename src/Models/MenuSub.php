@@ -10,8 +10,11 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Tall\Orm\Models\AbstractModel;
 use Tall\Tenant\Concerns\UsesLandlordConnection;
+use Tall\Tenant\Models\Landlord\Tenant;
+use Tall\Theme\Contracts\IMenu;
+use Tall\Theme\Contracts\IMenuSub;
 
-class MenuSub extends AbstractModel
+class MenuSub extends AbstractModel implements IMenuSub
 {
     use HasFactory, UsesLandlordConnection;
     
@@ -36,26 +39,22 @@ class MenuSub extends AbstractModel
 
     public function sub_menus()
     {
-        if(class_exists('\\App\\Models\\MenuSub')){
-            return $this->hasMany('\\App\\Models\\MenuSub');
-        }
-            return $this->hasMany(MenuSub::class);
+        return $this->hasMany(app(IMenuSub::class));
     }
 
     public function parent()
     {
-        if(class_exists('\\App\\Models\\MenuSub')){
-            return $this->belongsTo('\\App\\Models\\MenuSub','menu_sub_id');
-        }
-            return $this->belongsTo(MenuSub::class,'menu_sub_id');
+        return $this->belongsTo(app(IMenuSub::class),'menu_sub_id');
+    }
+
+    public function hasMenus()
+    {
+        return $this->belongsToMany(app(IMenu::class));
     }
 
     public function menus()
     {
-        if(class_exists('\\App\\Models\\Menu')){
-            return $this->belongsToMany('\\App\\Models\\Menu');
-        }
-            return $this->belongsToMany(Menu::class);
+        return $this->belongsToMany(app(IMenu::class));
     }
 
 
@@ -74,4 +73,17 @@ class MenuSub extends AbstractModel
         return $this->morphOne(MenuAttribute::class, 'menu_attributeable');
     }
 
+    
+    public function scopeTenants($query, $term)
+    {
+        return $query->whereHas('hasTenants', function ($builder) use ($term) {
+            $builder->where('id', $term);
+        });
+    }
+
+    public function hasTenants()
+    {
+        return $this->belongsToMany(Tenant::class)->withTimestamps();
+    }
+    
 }

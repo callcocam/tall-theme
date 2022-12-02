@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Tall\Form\Fields\Field;
 use Tall\Orm\Http\Livewire\FormComponent;
 use Tall\Theme\Contracts\Menu;
-use Tall\Theme\Contracts\MenuSub as ContractsMenuSub;
+use Tall\Theme\Contracts\IMenuSub as ContractsMenuSub;
 use Tall\Theme\Models\MenuSub;
 
 class CreateComponent extends FormComponent

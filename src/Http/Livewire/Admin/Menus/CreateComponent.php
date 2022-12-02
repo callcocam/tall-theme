@@ -9,7 +9,7 @@ namespace Tall\Theme\Http\Livewire\Admin\Menus;
 use Illuminate\Support\Facades\Route;
 use Tall\Form\Fields\Field;
 use Tall\Orm\Http\Livewire\FormComponent;
-use Tall\Theme\Contracts\Menu as ContractsMenu;
+use Tall\Theme\Contracts\IMenu as ContractsMenu;
 use Tall\Theme\Models\Menu;
 
 class CreateComponent extends FormComponent

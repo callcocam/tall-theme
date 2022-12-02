@@ -9,6 +9,7 @@ namespace Tall\Theme\Http\Livewire\Admin\Menus;
 use Illuminate\Support\Facades\Route;
 use Tall\Orm\Http\Livewire\TableComponent;
 use Tall\Table\Fields\Column;
+use Tall\Theme\Contracts\IMenu;
 use Tall\Theme\Models\Menu;
 
 class ListComponent extends TableComponent
@@ -41,14 +42,18 @@ class ListComponent extends TableComponent
     
     protected function query()
     {
-        if(class_exists('\\App\\Models\\Menu')){
-            return app('\\App\\Models\\Menu')->query();
-        }
-        return  Menu::query();
+        return  app()->make(IMenu::class)::query()->when(isTenant(), function($builder){
+            return $builder->tenants(get_tenant_id());
+        });
     }
     
     public function view($compnent="-component")
     {
         return 'tall::admin.menus.list-component';
+    }
+
+    public function getImportProperty()
+    {
+        return 'tall::admin.menus.import.csv-component';
     }
 }

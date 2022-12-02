@@ -33,9 +33,7 @@
             @if ($menuItems = data_get($sidebarMenu, 'sub_menus'))
                 @foreach ($menuItems as $keyMenu => $menu)
                     @if (!data_get($menu, 'menu_sub_id'))
-                        @if (Route::has(data_get($menu, 'link')))
-                            <x-tall-team-link :menu="$menu" />
-                        @endif
+                        <x-tall-team-link :menu="$menu" />
                     @endif
                 @endforeach
             @endif

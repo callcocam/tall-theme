@@ -12,10 +12,10 @@ use Symfony\Component\Finder\Finder;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Schema;
 use Livewire\Livewire;
-use Tall\Theme\Contracts\Menu;
-use Tall\Theme\Contracts\MenuSub;
-use Tall\Theme\Models\Menu as ModelsMenu;
-use Tall\Theme\Models\MenuSub as ModelsMenuSub;
+use Tall\Theme\Contracts\IMenu;
+use Tall\Theme\Contracts\IMenuSub;
+use Tall\Theme\Models\Menu;
+use Tall\Theme\Models\MenuSub;
 use Tall\Theme\View\Components\TeamLinkComponent;
 
 class ThemeServiceProvider extends ServiceProvider
@@ -64,17 +64,17 @@ class ThemeServiceProvider extends ServiceProvider
         }
      
         if(class_exists('App\Models\Menu')){
-            $this->app->singleton(Menu::class, 'App\Models\Menu');
+            $this->app->singleton(IMenu::class, 'App\Models\Menu');
         }
         else{
-            $this->app->singleton(Menu::class, ModelsMenu::class);
+            $this->app->singleton(IMenu::class, Menu::class);
         }
      
         if(class_exists('App\Models\MenuSub')){
-            $this->app->singleton(MenuSub::class, 'App\Models\MenuSub');
+            $this->app->singleton(IMenuSub::class, 'App\Models\MenuSub');
         }
         else{
-            $this->app->singleton(MenuSub::class, ModelsMenuSub::class);
+            $this->app->singleton(IMenuSub::class, MenuSub::class);
         }
 
         $this->mergeConfigFrom(
@@ -88,17 +88,20 @@ class ThemeServiceProvider extends ServiceProvider
         if (class_exists(Livewire::class)) {
             Livewire::component( 'tall::admin.dashboard-component', \Tall\Theme\Http\Livewire\Admin\DashboardComponent::class);
             Livewire::component( 'tall::admin.settings.apps.list-component', \Tall\Theme\Http\Livewire\Admin\Settings\Apps\ListComponent::class);
+           
             Livewire::component( 'tall::admin.menus.list-component', \Tall\Theme\Http\Livewire\Admin\Menus\ListComponent::class);
             Livewire::component( 'tall::admin.menus.create-component', \Tall\Theme\Http\Livewire\Admin\Menus\CreateComponent::class);
             Livewire::component( 'tall::admin.menus.edit-component', \Tall\Theme\Http\Livewire\Admin\Menus\EditComponent::class);
             Livewire::component( 'tall::admin.menus.show-component', \Tall\Theme\Http\Livewire\Admin\Menus\ShowComponent::class);
             Livewire::component( 'tall::admin.menus.delete-component', \Tall\Theme\Http\Livewire\Admin\Menus\DeleteComponent::class);
             Livewire::component( 'tall::admin.menus.attribute.edit-component', \Tall\Theme\Http\Livewire\Admin\Menus\Attribute\AttributeComponent::class);
-
+            Livewire::component( 'tall::admin.menus.import.csv-component', \Tall\Theme\Http\Livewire\Admin\Menus\Import\CsvComponent::class);
+            
             Livewire::component( 'tall::admin.menus.sub-menus.list-component', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\ListComponent::class);
             Livewire::component( 'tall::admin.menus.sub-menus.create-component', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\CreateComponent::class);
             Livewire::component( 'tall::admin.menus.sub-menus.edit-component', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\EditComponent::class);
             Livewire::component( 'tall::admin.menus.sub-menus.show-component', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\ShowComponent::class);
+            Livewire::component( 'tall::admin.menus.sub.import.csv-component', \Tall\Theme\Http\Livewire\Admin\Menus\Sub\Import\CsvComponent::class);
 
             Livewire::component( 'tall::includes.partials.sidebar.main-component', \Tall\Theme\Http\Livewire\Includes\Partials\Sidebar\MainComponent::class);
             Livewire::component( 'tall::includes.partials.sidebar.panel-component', \Tall\Theme\Http\Livewire\Includes\Partials\Sidebar\PanelComponent::class);
@@ -106,6 +109,10 @@ class ThemeServiceProvider extends ServiceProvider
             Livewire::component( 'tall::includes.partials.mobile.searchbar-component', \Tall\Theme\Http\Livewire\Includes\Partials\Mobile\SearchbarComponent::class);
             Livewire::component( 'tall::includes.partials.sidebar.right-component', \Tall\Theme\Http\Livewire\Includes\Partials\Sidebar\RightComponent::class);
             Livewire::component( 'tall::includes.partials.sidebar.user-component', \Tall\Theme\Http\Livewire\Includes\Partials\Sidebar\UserComponent::class);
+           
+           
+           
+            Livewire::component( 'tall::includes.partials.nav.headers.header-component', \Tall\Theme\Http\Livewire\Includes\Partials\Nav\Headers\HeaderComponent::class);
 
         }
     }

@@ -9,7 +9,7 @@ namespace Tall\Theme\Http\Livewire\Admin\Menus\Sub;
 use Illuminate\Support\Facades\Route;
 use Tall\Orm\Http\Livewire\TableComponent;
 use Tall\Table\Fields\Column;
-use Tall\Theme\Models\MenuSub;
+use Tall\Theme\Contracts\IMenuSub;
 
 class ListComponent extends TableComponent
 {
@@ -23,10 +23,7 @@ class ListComponent extends TableComponent
     
     protected function query()
     {
-        if(class_exists('\\App\\Models\\MenuSub')){
-            return app('\\App\\Models\\MenuSub')->query();
-        }
-        return  MenuSub::query();
+        return  app()->make(IMenuSub::class)::query();
     }
     
     /**
@@ -37,6 +34,7 @@ class ListComponent extends TableComponent
     public function columns(){
         return [
             Column::make('Name'),
+            Column::make('Menu','menu_sub_id'),
             // Column::status(),
             Column::actions([
                 Column::make('Edit')->icon('pencil')->route('admin.menus.sub-menus.edit'),
@@ -49,5 +47,11 @@ class ListComponent extends TableComponent
     public function view($compnent="-component")
     {
         return 'tall::admin.menus.sub.list-component';
+    }
+
+    
+    public function getImportProperty()
+    {
+        return 'tall::admin.menus.sub.import.csv-component';
     }
 }
