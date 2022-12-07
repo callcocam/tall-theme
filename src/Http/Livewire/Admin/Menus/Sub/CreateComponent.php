@@ -25,7 +25,7 @@ class CreateComponent extends FormComponent
    */
    public function mount(?MenuSub $model)
    {
-       $this->setFormProperties(app(ContractsMenuSub::class)->make($this->blankModel()),Route::currentRouteName()); 
+       $this->setFormProperties(app(ContractsMenuSub::class)->make($this->blankModel())); 
    }
     
    protected function fields()

@@ -23,7 +23,7 @@ class EditComponent extends FormComponent
    */
    public function mount($model)
    {
-       $this->setFormProperties(app(IMenuSub::class)->firstWhere('id', $model),Route::currentRouteName()); 
+       $this->setFormProperties(app(IMenuSub::class)->firstWhere('id', $model)); 
    }
     
    protected function fields()

@@ -30,19 +30,22 @@ class Menu extends AbstractModel
     public function sub_menus()
     {
             return $this->belongsToMany(app(IMenuSub::class))
-            ->when(isTenant(), function($builder){
-                $builder->tenants(get_tenant_id());
-            })
+            ->tenants(get_tenant_id())
+            // ->when(isTenant(), function($builder){
+            //     $builder->tenants(get_tenant_id());
+            // })
             ->whereNull('menu_subs.menu_sub_id')->limit(15);
     }
     
 
     public function items()
     {
-            return $this->belongsToMany(app(IMenuSub::class))            
-            ->when(isTenant(), function($builder){
-                $builder->tenants(get_tenant_id());
-            })->whereNotNull('menu_subs.menu_sub_id');
+            return $this->belongsToMany(app(IMenuSub::class)) 
+            ->tenants(get_tenant_id())           
+            // ->when(isTenant(), function($builder){
+            //     $builder->tenants(get_tenant_id());
+            // })
+            ->whereNotNull('menu_subs.menu_sub_id');
     }
 
      /**

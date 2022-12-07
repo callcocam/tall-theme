@@ -68,9 +68,9 @@ class TeamLinkComponent extends Component
 
     protected function icone(){
         if (View::exists(sprintf('tall::components.icons.outline.%s', data_get($this->menu, 'icone')))):
-            $component = sprintf('outline.%s', data_get($this->menu, 'icone'));
+            $component = data_get($this->menu, 'icone');
         elseif (View::exists(sprintf('tall::components.icons.solid.%s', data_get($this->menu, 'icone')))):
-            $component = sprintf('solid.%s', data_get($this->menu, 'icone'));
+            $component = data_get($this->menu, 'icone');
         else:
             $component = 'chevron-right';
         endif;
